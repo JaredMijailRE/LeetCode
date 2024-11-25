@@ -132,21 +132,21 @@ PYBIND11_MODULE(listPy, m) {
             "Inicializa una StaticArrayList con una capacidad específica")
         .def("empty", &StaticArrayList<int>::Empty,
             "Devuelve True si la lista está vacía, False en caso contrario")
-        .def("push_front", &StaticArrayList<int>::PushFront, py::arg("value"),
+        .def("pushFront", &StaticArrayList<int>::PushFront, py::arg("value"),
             "Agrega un elemento al inicio de la lista")
-        .def("push_back", &StaticArrayList<int>::PushBack, py::arg("value"),
+        .def("pushBack", &StaticArrayList<int>::PushBack, py::arg("value"),
             "Agrega un elemento al final de la lista")
-        .def("pop_front", &StaticArrayList<int>::PopFront,
+        .def("popFront", &StaticArrayList<int>::PopFront,
             "Elimina el primer elemento de la lista")
-        .def("pop_back", &StaticArrayList<int>::PopBack,
+        .def("popBack", &StaticArrayList<int>::PopBack,
             "Elimina el último elemento de la lista")
         .def("find", &StaticArrayList<int>::Find, py::arg("value"),
             "Busca un elemento y devuelve su índice o -1 si no se encuentra")
         .def("erase", &StaticArrayList<int>::Erase, py::arg("index"),
             "Elimina un elemento en el índice especificado")
-        .def("add_before", &StaticArrayList<int>::AddBefore, py::arg("index"), py::arg("value"),
+        .def("addBefore", &StaticArrayList<int>::AddBefore, py::arg("index"), py::arg("value"),
             "Agrega un elemento antes del índice especificado")
-        .def("add_after", &StaticArrayList<int>::AddAfter, py::arg("index"), py::arg("value"),
+        .def("addAfter", &StaticArrayList<int>::AddAfter, py::arg("index"), py::arg("value"),
             "Agrega un elemento después del índice especificado")
         .def("print_list", &StaticArrayList<int>::PrintList,
             "Imprime todos los elementos de la lista en la consola");

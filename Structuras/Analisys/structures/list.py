@@ -4,10 +4,10 @@ class StaticArrayList:
         self.size = 0
         self.data = [None] * max_size
 
-    def is_empty(self):
+    def empty(self):
         return self.size == 0
 
-    def push_front(self, element):
+    def pushFront(self, element):
         if self.size >= self.max_size:
             raise OverflowError("List is full")
         for i in range(self.size, 0, -1):
@@ -15,21 +15,21 @@ class StaticArrayList:
         self.data[0] = element
         self.size += 1
 
-    def push_back(self, element):
+    def pushBack(self, element):
         if self.size >= self.max_size:
             raise OverflowError("List is full")
         self.data[self.size] = element
         self.size += 1
 
-    def pop_front(self):
-        if self.is_empty():
+    def popFront(self):
+        if self.empty():
             raise IndexError("List is empty")
         for i in range(self.size - 1):
             self.data[i] = self.data[i + 1]
         self.size -= 1
 
-    def pop_back(self):
-        if self.is_empty():
+    def popBack(self):
+        if self.empty():
             raise IndexError("List is empty")
         self.size -= 1
 
@@ -51,7 +51,7 @@ class StaticArrayList:
             self.data[i] = self.data[i + 1]
         self.size -= 1
 
-    def add_before(self, target, element):
+    def addBefore(self, target, element):
         index = -1
         for i in range(self.size):
             if self.data[i] == target:
@@ -66,7 +66,7 @@ class StaticArrayList:
         self.data[index] = element
         self.size += 1
 
-    def add_after(self, target, element):
+    def addAfter(self, target, element):
         index = -1
         for i in range(self.size):
             if self.data[i] == target:
