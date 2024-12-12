@@ -152,6 +152,23 @@ public:
         }
         os << "]" << endl;
     }
+
+    void inserSort(int key){
+        if (head == nullptr){
+            pushFront(key);
+        }else{
+            Node* temp = head;
+            if(key <= temp->data){
+                pushFront(key);
+                return;}
+            while (temp->next != nullptr) {
+                if (temp->data < key && key <= temp->next->data) {
+                    addAfter(temp, key);
+                    return;}
+                temp = temp->next;
+            } pushBack(key);
+        }
+    }
 };
 
 int main() {
@@ -188,8 +205,12 @@ int main() {
                 case 5: // Remove first
                     list.popFront();
                     break;
-                default:
-                    cout << "Error: Comando inválido." << endl;
+                case 6:
+                    if (ss >> value) {
+                        list.inserSort(value);
+                    } else {
+                        cout << "Error: Falta el valor para añadir al final." << endl;
+                    }
             }
         } catch (const runtime_error& e) {
             cout << "Error: " << e.what() << endl;

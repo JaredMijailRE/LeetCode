@@ -140,6 +140,32 @@ public:
         }
         os << "]" << endl;
     }
+
+    void addAfter(Node<T>* node, int key) {
+        if (node == nullptr)
+            throw runtime_error("Referencia inválida de nodo.");
+        Node<T>* newNodo = new Node<T>(key);
+        newNodo->next = node->next;
+        node->next = newNodo;
+    }
+
+
+    void inserSort(int key){
+        if (head == nullptr){
+            pushFront(key);
+        if (tail->data < key) pushBack(key);
+        }else{
+            Node<T>* temp = head;
+            if(key <= temp->data){
+                pushFront(key);
+                return;}
+            while (true) {
+                if (temp->data < key && key <= temp->next->data) {
+                    addAfter(temp, key);
+                    return;}
+                temp = temp->next;}
+        }
+    }
 };
 
 int main() {
@@ -170,8 +196,12 @@ int main() {
                 case 5: // Remove first
                     list.popFront();
                     break;
-                default:
-                    cout << "Error: Comando inválido." << endl;
+                case 6:
+                    if (ss >> value) {
+                        list.inserSort(value);
+                    } else {
+                        cout << "Error: Falta el valor para añadir al final." << endl;
+                    }
             }
         } catch (const runtime_error& e) {
             cout << "Error: " << e.what() << endl;
