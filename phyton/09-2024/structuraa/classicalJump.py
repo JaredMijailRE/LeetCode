@@ -17,9 +17,8 @@ class factory():
                 self.size += 1
                 
     def evaluation(self, scores: staticStack):
-        n = scores.size - 1
-        differences = [abs(scores.data[i] - scores.data[i - 1]) for i in range(2, n)]
-        expected = list(range(2, n))
+        differences = [abs(scores.data[i] - scores.data[i + 1]) for i in range(1, scores.size-1)]
+        expected = list(range(1, scores.size-1))
         if sorted(differences) == expected:
             print("Jolly")
         else:
@@ -41,4 +40,5 @@ if __name__ == '__main__':
             UNAL.evaluation(scores)
         except:
             break
+
 
