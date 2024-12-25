@@ -19,15 +19,19 @@ if __name__ == '__main__':
     size = int(input())
     last = 0
     words = staticStack(size)
+    temp = []
     for n in range(size):
         word = input()
         words.add(word)
+        answers = [n]
+        temp.append(answers)
 
     for n in range(size-1):
-        n = input()
-        n = n.split()
-        for i in range(2):
-            n[i] = int(n[i])
-        last = n[0]
-        words.data[n[0]-1] = words.data[n[0]-1] + words.data[n[1]-1]
-    print(words.data[last - 1])
+        n = list(map(int, input().split()[:2]))
+        last = n[0]-1
+        for l in temp[n[1]-1]:
+            temp[n[0]-1].append(l) 
+        temp[n[1]-1] = ""
+        
+    for n in temp[last]:
+        print(words.data[n], end='')

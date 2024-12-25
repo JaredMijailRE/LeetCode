@@ -2,50 +2,76 @@
 #include <vector>
 #include <string>
 using namespace std;
-class StaticStack {
-private:
-    vector<string> data;
-    int size;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int value) : data(value), next(nullptr) {}
+};
+class LinkedList {
 public:
-    StaticStack(int capacity) : data(capacity), size(0) {}
-    void add(const string& value) {
-        if (size == data.size()) {
-            cout << "list is full" << endl;
-        } else {
-            data[size] = value;
-            size++;
+    Node* head;
+public:
+    LinkedList() : head(nullptr) {}
+    ~LinkedList() {
+        while (!booleanEmpty()) {
+            popFront();
         }
     }
-    void pop() {
-        if (size == 0) {
-            cout << "No element to delete" << endl;
-        } else {
-            size--;
-        }
+    bool booleanEmpty() const {
+        return head == nullptr;
     }
-    string& at(int index) {
-        return data[index];
+    void pushFront(int key) {
+        Node* nodo = new Node(key);
+        nodo->next = head;
+        head = nodo;
+    }
+    void popFront() {
+        if (head == nullptr)
+            throw runtime_error("Lista vacía. No se puede eliminar el elemento del frente.");
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+    void print(const vector<string> posts) const {
+        Node* temp = head;
+        bool first = true;  
+        while (temp != nullptr) {
+            if (!first) cout << " ";  
+            cout << (posts[temp->data]);
+            first = false;
+            temp = temp->next;
+        }
+        cout << endl; 
     }
 };
 int main() {
-    int size;
-    cin >> size;
-    int last = 0;
-    StaticStack words(size);
-    for (int n = 0; n < size; n++) {
-        string word;
-        cin >> word;
-        words.add(word);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int N;
+    cin >> N;
+    vector<string> posts(N);
+    vector<LinkedList> linked(N);
+    for (int i = 0; i < N; i++) {
+        cin >> posts[i];
+        LinkedList space;
+        space.pushFront(i);
+        linked[i] = space;
     }
-    for (int n = 0; n < size - 1; n++) {
-        int index1, index2;
-        cin >> index1 >> index2;
-        index1--; 
-        index2--;
-        words.at(index1) += words.at(index2);
-        words.at(index2) = "";
-        last = index1 + 1; 
+    LinkedList space;
+    space.pushFront(N); 
+    int last;
+    for (int i = 0; i < N - 1; i++) {
+        int a, b;
+        cin >> a >> b;
+        a--; b--; 
+        last = a;
+        if (linked[b].head->data != N) {
+            linked[a].pushFront(b);
+        }
+        linked[b] = space;
     }
-    cout << words.at(last - 1) << endl;
+    linked[last].print(posts); 
+
     return 0;
 }
