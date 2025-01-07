@@ -8,7 +8,7 @@ class Solution:
         max = 0
 
         for n in range(1, len(s)):
-            result = self.evaluate(s[:n+1], s[n:])
+            result = self.evaluate(s[:n], s[n:])
             if result > max:
                 max = result
 
